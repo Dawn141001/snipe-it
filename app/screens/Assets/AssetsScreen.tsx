@@ -1,9 +1,12 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {ActivityIndicator, Appbar, Searchbar} from 'react-native-paper';
 
-export default function AssetsScreen({navigation}: any) {
+export default function AssetsScreen() {
   const [searchQuery, setSearchQuery] = React.useState('');
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Appbar.Header

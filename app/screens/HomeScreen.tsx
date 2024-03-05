@@ -1,25 +1,24 @@
-import React, { Children, useEffect } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useNavigation } from '@react-navigation/native';
+import React, { useEffect } from 'react';
 import {
-  StyleSheet,
-  View,
-  Text,
   Image,
   ScrollView,
+  StyleSheet,
+  Text,
   TouchableHighlight,
-  TouchableOpacity,
-  Linking,
+  View
 } from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Appbar, Searchbar} from 'react-native-paper';
-import { AssetsAPI } from '../apis/Assets.api';
-import {RNCamera} from 'react-native-camera';
+import { Searchbar } from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
-import QRCodeScanner from 'react-native-qrcode-scanner';
-import SettingScreen from './SettingScreen';
-import { NavigationContainer } from '@react-navigation/native';
-import AssetsScreen from './Assets/AssetsScreen';
-import {useAppDispatch, useAppSelector} from '../slices/hooks'; 
+import { AssetsAPI } from '../apis/Assets.api';
+import { useAppDispatch, useAppSelector } from '../slices/hooks';
 import { GetAssets, SetAssets } from '../slices/reducers/Assets/Assets.reducer';
+import {AppConfig} from '../AppConfig';
+import { CategoriesAPI } from '../apis/Category.api';
+import { GetCategory, SetCategory } from '../slices/reducers/Category/Category.reducer';
+import { ICategory } from '../interface/Category.interface';
+import { IAsset } from '../interface/Asset.interface';
 
 interface Assets {
   model: string;
@@ -30,82 +29,37 @@ interface Assets {
 }
 const Tab = createBottomTabNavigator();
 
-export default function HomeScreen({navigation}: any) {
+export default function HomeScreen() {
   const [searchQuery, setSearchQuery] = React.useState('');
+  const [filterCategory, setfilterCategory] = React.useState('');
+
+  const navigation = useNavigation();
   const listAssets=useAppSelector(GetAssets);
-const dispatch=useAppDispatch();
+  const listCategory=useAppSelector(GetCategory);
+  const dispatch=useAppDispatch();
+
 useEffect(()=>{
-AssetsAPI.fetchAll().then((result)=>dispatch(SetAssets(result.data))).catch((err)=>{
-  console.log(err)
-})
+  CategoriesAPI.fetchAll().then(res=>{dispatch(SetCategory(res.data.rows));
+  }).catch(err => {
+      console.log(err);
+    });
 },[dispatch])
-  
-const sports = [
-  {
-    label: 'Football',
-    key: 'football',
-    value: 'football',
-  },
-  {
-    label: 'Baseball',
-    value: 'baseball',
-    key: 'baseball',
-  },
-  {
-    label: 'Hockey',
-    value: 'hockey',
-    key: 'hockey',
-  },
-];
-  const fetchData=async ()=>{
-    const data = await fetch('http://192.168.1.54:80/api/v1/hardware', {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNjEzNGM2OWNjNmMzNDNmMzgwYmZiMGQ2ZmQwNGIzNjhiNjgzMTM4NTQwZGMzNDNkY2Q0Y2EyMzhiYjcyYWVmN2ZkYjM5N2ZlZGM0NGJiMGQiLCJpYXQiOjE3MDkzNzQ5MzQuNzY0OTg3LCJuYmYiOjE3MDkzNzQ5MzQuNzY0OTksImV4cCI6MjE4MjY3NDEzNC43MDg1MDYsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.fOK_7nOBKIZzcis2aCTOhqU8xiaJ8srhmXw_TUh8g-Hlnyk3p7f4GPYD69et-0VLxtgu5e6n0cXQAQ-qVscbIDYisnMLx-I1N_pZzdeEWJPOKCbAcNWd4TroN__RHCPytzLwKmgCCWGpEkMVzYkh-R09RpTks3lwZToojEpHGmUGAP1AbmFfAojrFj275oMp00c25fRuvvxZDizR2pkHT8w-K1Zl9KuhZNIfyn_C3hbOPKJ6BhHHytuPMN_WrkLrYqetTL7z4Hp7u-TPLaEIzO9JarozH3Gn2cZqlf_znQMLXDW0zlu7v1Z2RdT16VXa2Vp-jD3gn3Rfi2p3tILwvOfmNqsvk5UtIpEvTijcBrC52pDuJJAZ4J-9PVhdCzCOPN0zcjDLjaCfCz5CrclgnVfllANQ-Kz4m2SQyZ9LOLrNFpEh1pKTD7jV_xUZ6xPtgGbZyY5dA86N8uVEt6dC9cDLlw140srL8I1-vcJqcMu13w6Y9XCBZbnqsvxzPsJ7q9c0IBajkbKWQG_MPSC46-bwnvddVGqZ0pGfZktDIxDmyyEVlVJoavykweN9uUDV5WlLR0rIDoVX0vrJT4teaZCO_BVP1x3JeAaD37c56hvbc-wqBlnugtJTiflZvGeBqzyNHbuLV8wACfP-5Mqg1fSGuwuzsMeaqOqtbInZosY',
-        Accept: '*/*',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(el => {
-        console.log(el.json());
-      })
-      .catch(er => console.log(er));
-    return data
-  }
+
 useEffect(()=>{
-  AssetsAPI.fetchAll().then(el=>console.log(el.data)).catch((er)=>console.log(er))
-//  fetchData()
-},[])
-  const listItem: Assets[] = [
-    {
-      model: 'Dell Latitude 1311',
-      category: 'Laptops',
-      manufact: 'Dells',
-      cost: 100,
-      status: 'Ready to Deploys',
-    },
-    {
-      model: 'Dell Latitude 1313',
-      category: 'Laptops',
-      manufact: 'Dells',
-      cost: 120,
-      status: 'Ready to Deploys',
-    },
-    {
-      model: 'Dell Latitude 1313',
-      category: 'Laptops',
-      manufact: 'Dells',
-      cost: 120,
-      status: 'Ready to Deploys',
-    },
-    {
-      model: 'Dell Latitude 1313',
-      category: 'Laptops',
-      manufact: 'Dells',
-      cost: 120,
-      status: 'Ready to Deploys',
-    },
-  ];
+
+
+       AssetsAPI.fetchAll().then(result =>
+         dispatch(
+           SetAssets(
+             result.data.rows
+           ),
+         ),
+       );
+    
+},[dispatch])
+
+
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -127,34 +81,116 @@ useEffect(()=>{
           <View style={{flexDirection: 'row', alignItems: 'center', gap: 50}}>
             <Text>Manufactory</Text>
             <View style={{width: 200}}>
-              <RNPickerSelect
-                items={sports}
-                onValueChange={value => {
-                  console.log(value);
-                }}
-                value={sports[0].value}
-              />
+              {listCategory.length > 0 && (
+                <RNPickerSelect
+                  items={listCategory.map(el => ({
+                    key: `${el.id}`,
+                    value: `${el.id}`,
+                    label: `${el.name}`,
+                  }))}
+                  onValueChange={value => {
+                  
+                  }}
+                  value={
+                    listCategory.map(el => ({
+                      key: el.id?.toString(),
+                      value: el.id?.toString(),
+                      label: el.name?.toString(),
+                    }))[0].value
+                  }
+                />
+              )}
             </View>
           </View>
           <View style={{flexDirection: 'row', alignItems: 'center', gap: 50}}>
             <Text>Category</Text>
             <View style={{width: 200}}>
-              <RNPickerSelect
-                items={sports}
-                onValueChange={value => {
-                  console.log(value);
-                }}
-                value={sports[0].value}
-              />
+              {listCategory.length > 0 && (
+                <RNPickerSelect
+                  items={listCategory.map(el => ({
+                    key: `${el.id}`,
+                    value: `${el.id}`,
+                    label: `${el.name}`,
+                  }))}
+                  onValueChange={value => {
+                   setfilterCategory(value)
+                  }}
+                  value={
+                    listCategory.map(el => ({
+                      key: el.id?.toString(),
+                      value: el.id?.toString(),
+                      label: el.name?.toString(),
+                    }))[0].value
+                  }
+                />
+              )}
             </View>
           </View>
         </View>
         <View style={{marginTop: 20}}>
-          {listItem.map((item, index) => {
+          {listAssets.map((item, index) => {
+            console.log(item.category?.id===Number(filterCategory)&&filterCategory.length>0)
+            if(
+              filterCategory.length>0 && item.category?.id===Number(filterCategory)
+            ){
+              return (
+                <TouchableHighlight
+                  key={`${item.model}-${index}`}
+                  onPress={() =>
+                    navigation.navigate('DetailAssetScreen', {id: item.id})
+                  }>
+                  <View
+                    style={{
+                      padding: 10,
+                      flexDirection: 'row',
+                      gap: 20,
+                      height: 120,
+                    }}>
+                    <Image
+                      src={
+                        item.image
+                          ? `${AppConfig.baseUrlImage}/${item.image
+                              ?.split('/')
+                              .pop()}`
+                          : 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg'
+                      }
+                      style={{
+                        height: 100,
+                        width: 100,
+                        objectFit: 'cover',
+                      }}></Image>
+                    <View
+                      style={{
+                        flexDirection: 'column',
+                        flex: 1,
+                        justifyContent: 'space-between',
+                        paddingBottom: 5,
+                      }}>
+                      <Text style={{fontWeight: 'bold'}}>{item.asset_tag}</Text>
+                      <Text style={{fontWeight: 'bold', fontSize: 20}}>
+                        {item.model?.name}
+                      </Text>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                        }}>
+                        <Text>{item.category?.name}</Text>
+                      </View>
+                      <Text>{item.status_label?.name}</Text>
+                      <Text>
+                        {item.purchase_cost ? item.purchase_cost : 'Unknown'}{' '}
+                        USD
+                      </Text>
+                    </View>
+                  </View>
+                </TouchableHighlight>
+              );
+            }
             return (
               <TouchableHighlight
                 key={`${item.model}-${index}`}
-                onPress={() => navigation.navigate('DetailAssetScreen')}>
+                onPress={() => navigation.navigate('DetailAssetScreen',{id:item.id})}>
                 <View
                   style={{
                     padding: 10,
@@ -163,7 +199,13 @@ useEffect(()=>{
                     height: 120,
                   }}>
                   <Image
-                    src="https://cdn.tgdd.vn/Files/2017/01/19/939425/cach-cai-hinh-nen-may-tinh-khong-bi-mo_1280x720-800-resize.jpg"
+                    src={
+                      item.image
+                        ? `${AppConfig.baseUrlImage}/${item.image
+                            ?.split('/')
+                            .pop()}`
+                        : 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg'
+                    }
                     style={{
                       height: 100,
                       width: 100,
@@ -176,19 +218,21 @@ useEffect(()=>{
                       justifyContent: 'space-between',
                       paddingBottom: 5,
                     }}>
+                    <Text style={{fontWeight: 'bold'}}>{item.asset_tag}</Text>
                     <Text style={{fontWeight: 'bold', fontSize: 20}}>
-                      {item.model}
+                      {item.model?.name}
                     </Text>
                     <View
                       style={{
                         flexDirection: 'row',
                         justifyContent: 'space-between',
                       }}>
-                      <Text>{item.manufact}</Text>
-                      <Text>{item.category}</Text>
+                      <Text>{item.category?.name}</Text>
                     </View>
-                    <Text>{item.status}</Text>
-                    <Text>{item.cost} USD</Text>
+                    <Text>{item.status_label?.name}</Text>
+                    <Text>
+                      {item.purchase_cost ? item.purchase_cost : 'Unknown'} USD
+                    </Text>
                   </View>
                 </View>
               </TouchableHighlight>

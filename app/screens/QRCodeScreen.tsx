@@ -1,5 +1,4 @@
-import { Linking, StyleSheet, TouchableOpacity } from "react-native";
-import { RNCamera } from "react-native-camera";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Text } from "react-native-paper";
 import QRCodeScanner from "react-native-qrcode-scanner";
 

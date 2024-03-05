@@ -1,8 +1,11 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {Button, Icon, TextInput} from 'react-native-paper';
 
-export default function LoginAPITokenScreen({navigation}: any) {
+export default function LoginAPITokenScreen() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={{justifyContent: 'center', alignItems: 'center'}}>

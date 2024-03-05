@@ -10,12 +10,17 @@ export class AssetsAPI {
       url: `/${this.COMPONENT_NAME}`,
     });
   };
-
-  static create = (data:IAsset) => {
+  static getAssetById = (id:number) => {
+    return request({
+      method: Method.GET,
+      url: `/${this.COMPONENT_NAME}/${id}`,
+    });
+  };
+  static create = (data: IAsset) => {
     return request({
       method: Method.POST,
       url: `/${this.COMPONENT_NAME}`,
-      data:data
+      data: data,
     });
   };
   static delete = (id: number) => {

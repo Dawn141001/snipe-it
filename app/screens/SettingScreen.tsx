@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {
   Text,
@@ -9,8 +10,10 @@ import {
 } from 'react-native';
 import {Button, Icon, IconButton, List} from 'react-native-paper';
 
-export default function SettingScreen({navigation}: any) {
+export default function SettingScreen() {
+  
   const [expanded, setExpanded] = React.useState(false);
+  const navigation = useNavigation();
 
   const handlePress = () => setExpanded(!expanded);
   return (

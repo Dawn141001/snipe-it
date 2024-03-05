@@ -10,11 +10,12 @@ import {store} from './slices/store.ts';
 import SettingScreen from './screens/SettingScreen.tsx';
 import LoginAPITokenScreen from './screens/Login/LoginAPITokenScreen.tsx';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
 import LoginQRCodeScreen from './screens/Login/LoginQRCodeScreen.tsx';
 import DetailAssetScreen from './screens/Assets/components/DetailAssetScreen.tsx';
 import { Icon } from 'react-native-paper';
 import { QRCode } from './screens/QRCodeScreen.tsx';
+import ProfileScreen from './screens/User/ProfileScreen.tsx';
+import EditProfileScreen from './screens/User/EditProfileScreen.tsx';
 
 const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -39,9 +40,9 @@ function App() {
             }}
           />
           <Stack.Screen name="LoginAPIToken" component={LoginAPITokenScreen} />
+          <Stack.Screen name="EditProfile" component={EditProfileScreen} />
           <Stack.Screen name="LoginQRCode" component={LoginQRCodeScreen} />
         </Stack.Navigator>
-    
       </NavigationContainer>
     </Provider>
   );
@@ -84,7 +85,7 @@ const HomeStack = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={SettingScreen}
+        component={ProfileScreen}
         options={{
           tabBarIcon: ({focused}) => {
             return (

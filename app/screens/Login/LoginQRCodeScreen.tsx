@@ -1,8 +1,11 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, View, Text, ScrollView} from 'react-native';
 import {Button, Icon, List} from 'react-native-paper';
 
-export default function LoginQRCodeScreen({navigation}: any) {
+export default function LoginQRCodeScreen() {
+  const navigation = useNavigation();
+
   return (
     <ScrollView>
       <View style={styles.container}>
