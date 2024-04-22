@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 
-export default function HomeScreen() {
+export default function OtherScreen() {
   const navigation = useNavigation();
 
   return (
@@ -21,7 +21,7 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}>
         <View>
           <Image
-            source={require('../images/assets.png')}
+            source={require('../../images/assets.png')}
             style={{height: 100, width: '100%', objectFit: 'cover'}}
           />
         </View>
@@ -32,9 +32,9 @@ export default function HomeScreen() {
             justifyContent: 'space-around',
           }}>
           <TouchableWithoutFeedback
-            key={`assets`}
+            key={`categories`}
             style={{borderWidth: 1, borderRadius: 10, borderColor: 'black'}}
-            onPress={() => navigation.navigate('AssetScreen')}>
+            onPress={() => navigation.navigate('CategoriesScreen')}>
             <View
               style={{
                 height: 100,
@@ -51,14 +51,14 @@ export default function HomeScreen() {
                   color: 'white',
                   textAlign: 'center',
                 }}>
-                Assets
+                Categories
               </Text>
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback
-            key={`other`}
+            key={`models`}
             style={{borderWidth: 1, borderRadius: 10, borderColor: 'black'}}
-            onPress={() => navigation.navigate('OtherScreen')}>
+            onPress={() => navigation.navigate('ModelScreen')}>
             <View
               style={{
                 height: 100,
@@ -72,10 +72,10 @@ export default function HomeScreen() {
               <Text
                 style={{
                   textTransform: 'uppercase',
-                  textAlign: 'center',
                   color: 'white',
+                  textAlign: 'center',
                 }}>
-                Manager Other
+                Models
               </Text>
             </View>
           </TouchableWithoutFeedback>

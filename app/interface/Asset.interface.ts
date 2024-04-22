@@ -1,34 +1,40 @@
-import { ICategory } from "./Category.interface";
-import { IModel } from "./Model.interface";
-import { IStatus } from "./Status.interface";
+import {ICategory} from './Category.interface';
+import {IModel} from './Model.interface';
+import {IStatus} from './Status.interface';
 
-enum Status{
-  Pending,Deployed,Archived,ReadyToDeploy
+enum Status {
+  Pending,
+  Deployed,
+  Archived,
+  ReadyToDeploy,
 }
-enum CheckInOut{
-  CheckIn,CheckOut
+enum CheckInOut {
+  CheckIn,
+  CheckOut,
 }
-interface IAssignedTo{
-  email	?:	string;
-employee_number	?:	string;
-first_name	?:	string;
-id	?:	number;
-last_name	?:	string;
-name	?:	string;
-type	?:	string
-username	?:	string;
-
+interface IAssignedTo {
+  email?: string;
+  employee_number?: string;
+  first_name?: string;
+  id?: number;
+  last_name?: string;
+  name?: string;
+  type?: string;
+  username?: string;
 }
 
 export interface IAsset {
-  id?:string;
+  id?: string;
+  name?: string;
   asset_tag?: string;
   assigned_to?: IAssignedTo;
   manufacturer?: string;
   image?: string;
-  model?: IModel;
-  category?: ICategory;
-  status_label?: IStatus;
+  status_id: number;
+  model_id: number;
+  model?: IModel | null;
+  category?: ICategory | null;
+  status_label?: IModel | null;
   location?: string;
   purchase_cost?: number;
 }

@@ -43,13 +43,13 @@ export const AssetsSlice = createSlice({
     //     return state;
     //   }
     // },
-    // DeleteAssets: (state, action: PayloadAction<IAsset>) => {
-    //   const index = state.findIndex(el => el.id === action.payload.id);
-    //   if (index > -1) {
-    //     state.splice(index, 1);
-    //     return state;
-    //   }
-    // },
+    DeleteAssets: (state, action: PayloadAction<IAsset>) => {
+      const index = state.findIndex(el => el.id === action.payload.id);
+      if (index > -1) {
+        state.splice(index, 1);
+        return state;
+      }
+    },
     SetAssets: (state, action: PayloadAction<IAsset[]>) => {
       state = action.payload;
       return state;
@@ -57,7 +57,7 @@ export const AssetsSlice = createSlice({
   },
 });
 
-export const {AddAssets, SetAssets} =
+export const {AddAssets, SetAssets,DeleteAssets} =
   AssetsSlice.actions;
 
 export const GetAssets = (state: RootState) => state.assets;

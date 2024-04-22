@@ -1,4 +1,7 @@
-export interface IModel{
-  id?:number;
-name?:string
+import {ICategory} from './Category.interface';
+
+export interface IModel {
+  id?: number;
+  name?: string;
+  category?: ICategory;
 }

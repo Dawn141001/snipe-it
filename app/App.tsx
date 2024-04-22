@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
@@ -8,17 +6,22 @@ import HomeScreen from './screens/HomeScreen.tsx';
 import {Provider} from 'react-redux';
 import {store} from './slices/store.ts';
 import SettingScreen from './screens/SettingScreen.tsx';
+import CreateAsset from './screens/Assets/components/CreateAsset.tsx';
 import LoginAPITokenScreen from './screens/Login/LoginAPITokenScreen.tsx';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import LoginQRCodeScreen from './screens/Login/LoginQRCodeScreen.tsx';
 import DetailAssetScreen from './screens/Assets/components/DetailAssetScreen.tsx';
-import { Icon } from 'react-native-paper';
-import { QRCode } from './screens/QRCodeScreen.tsx';
+import {Icon} from 'react-native-paper';
+import {QRCode} from './screens/QRCodeScreen.tsx';
 import ProfileScreen from './screens/User/ProfileScreen.tsx';
 import EditProfileScreen from './screens/User/EditProfileScreen.tsx';
+import AssetScreen from './screens/Assets/AssetScreen.tsx';
+import OtherScreen from './screens/Others/OtherScreen.tsx';
+import CategoriesScreen from './screens/Categories/CategoriesScreen.tsx';
+import ModelScreen from './screens/Models/ModelScreen.tsx';
 
 const Stack = createNativeStackNavigator();
-  const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 function App() {
   return (
     <Provider store={store}>
@@ -35,13 +38,16 @@ function App() {
           <Stack.Screen
             name="DetailAssetScreen"
             component={DetailAssetScreen}
-            options={{
-              headerShown: false,
-            }}
           />
           <Stack.Screen name="LoginAPIToken" component={LoginAPITokenScreen} />
           <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+          <Stack.Screen name="AssetScreen" component={AssetScreen} />
+          <Stack.Screen name="OtherScreen" component={OtherScreen} />
+          <Stack.Screen name="CategoriesScreen" component={CategoriesScreen} />
+          <Stack.Screen name="ModelScreen" component={ModelScreen} />
+
           <Stack.Screen name="LoginQRCode" component={LoginQRCodeScreen} />
+          <Stack.Screen name="CreateAsset" component={CreateAsset} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

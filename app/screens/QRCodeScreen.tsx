@@ -1,31 +1,28 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
-import { Text } from "react-native-paper";
-import QRCodeScanner from "react-native-qrcode-scanner";
+import {StyleSheet, TouchableOpacity} from 'react-native';
+import {Text} from 'react-native-paper';
+import QRCodeScanner from 'react-native-qrcode-scanner';
 
-export const QRCode=()=>{
+export const QRCode = () => {
   return (
-     <QRCodeScanner
-          onRead={
-            e => {
-             console.log(e)
-            }
-          }
-          // flashMode={RNCamera.Constants.FlashMode.torch}
-          topContent={
-            <Text style={styles.centerText}>
-              Go to
-              <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on
-              your computer and scan the QR code.
-            </Text>
-          }
-          bottomContent={
-            <TouchableOpacity style={styles.buttonTouchable}>
-              <Text style={styles.buttonText}>OK. Got it!</Text>
-            </TouchableOpacity>
-          }
-        />
+    <QRCodeScanner
+      onRead={e => {
+        console.log(e);
+      }}
+      topContent={
+        <Text style={styles.centerText}>
+          Go to
+          <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on
+          your computer and scan the QR code.
+        </Text>
+      }
+      bottomContent={
+        <TouchableOpacity style={styles.buttonTouchable}>
+          <Text style={styles.buttonText}>OK. Got it!</Text>
+        </TouchableOpacity>
+      }
+    />
   );
-}
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,

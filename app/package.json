@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@react-native-picker/picker": "^2.6.1",
+    "@react-native-picker/picker": "^2.7.2",
     "@react-navigation/bottom-tabs": "^6.5.16",
     "@react-navigation/native": "^6.1.14",
     "@react-navigation/native-stack": "^6.9.22",
@@ -21,6 +21,7 @@
     "react-native": "0.73.5",
     "react-native-asset": "^2.1.1",
     "react-native-camera": "^4.2.1",
+    "react-native-dropdown-picker": "^5.4.6",
     "react-native-paper": "^5.12.3",
     "react-native-picker-select": "^9.0.1",
     "react-native-qrcode-scanner": "^1.5.5",
