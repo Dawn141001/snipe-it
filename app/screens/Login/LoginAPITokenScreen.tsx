@@ -1,11 +1,14 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import {Button, Icon, TextInput} from 'react-native-paper';
+import {Button, Icon, Snackbar, TextInput} from 'react-native-paper';
 // import Snackbar from 'react-native-snackbar';
 
 export default function LoginAPITokenScreen() {
   const navigation = useNavigation();
+  const [token, setToken] = useState<string>('');
+  const [visible, setVisible] = useState(false);
+  const [textSnack, setTextSnack] = useState<string>('');
 
   return (
     <View style={styles.container}>
@@ -22,6 +25,7 @@ export default function LoginAPITokenScreen() {
         </Text>
         <TextInput
           placeholder="Snipe-IT Base URL"
+          onChangeText={el => setToken(el)}
           style={{paddingHorizontal: 10, backgroundColor: 'white'}}
         />
       </View>
@@ -29,11 +33,14 @@ export default function LoginAPITokenScreen() {
         <Button
           labelStyle={{color: 'white'}}
           onPress={() => {
-            // Snackbar.show({
-            //   text: 'Hello world',
-            //   duration: 2,
-            // });
-            navigation.navigate('LoginQRCode');
+            if (token === 'admin') {
+              setTextSnack('Đăng nhập thành công');
+
+              navigation.navigate('HomeApp');
+            } else {
+              setTextSnack('Đăng nhập thất bại');
+            }
+            setVisible(true);
           }}
           style={{
             width: 100,
@@ -42,6 +49,12 @@ export default function LoginAPITokenScreen() {
           Send
         </Button>
       </View>
+      <Snackbar
+        visible={visible}
+        onDismiss={() => setVisible(false)}
+        duration={Snackbar.DURATION_SHORT}>
+        {textSnack}
+      </Snackbar>
     </View>
   );
 }

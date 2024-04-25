@@ -1,24 +1,24 @@
 import * as React from 'react';
 
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from './screens/HomeScreen.tsx';
-import {Provider} from 'react-redux';
-import {store} from './slices/store.ts';
-import SettingScreen from './screens/SettingScreen.tsx';
-import CreateAsset from './screens/Assets/components/CreateAsset.tsx';
-import LoginAPITokenScreen from './screens/Login/LoginAPITokenScreen.tsx';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import LoginQRCodeScreen from './screens/Login/LoginQRCodeScreen.tsx';
-import DetailAssetScreen from './screens/Assets/components/DetailAssetScreen.tsx';
 import {Icon} from 'react-native-paper';
-import {QRCode} from './screens/QRCodeScreen.tsx';
-import ProfileScreen from './screens/User/ProfileScreen.tsx';
-import EditProfileScreen from './screens/User/EditProfileScreen.tsx';
+import {Provider} from 'react-redux';
 import AssetScreen from './screens/Assets/AssetScreen.tsx';
-import OtherScreen from './screens/Others/OtherScreen.tsx';
+import CreateAsset from './screens/Assets/components/CreateAsset.tsx';
+import DetailAssetScreen from './screens/Assets/components/DetailAssetScreen.tsx';
 import CategoriesScreen from './screens/Categories/CategoriesScreen.tsx';
+import CreateCategory from './screens/Categories/components/CreateCategories.tsx';
+import HomeScreen from './screens/HomeScreen.tsx';
+import LoginAPITokenScreen from './screens/Login/LoginAPITokenScreen.tsx';
 import ModelScreen from './screens/Models/ModelScreen.tsx';
+import CreateModel from './screens/Models/components/CreateModel.tsx';
+import OtherScreen from './screens/Others/OtherScreen.tsx';
+import {QRCode} from './screens/QRCodeScreen.tsx';
+import EditProfileScreen from './screens/User/EditProfileScreen.tsx';
+import ProfileScreen from './screens/User/ProfileScreen.tsx';
+import {store} from './slices/store.ts';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,7 +34,7 @@ function App() {
               headerShown: false,
             }}
           />
-          <Stack.Screen name="Setting" component={SettingScreen} />
+
           <Stack.Screen
             name="DetailAssetScreen"
             component={DetailAssetScreen}
@@ -45,8 +45,9 @@ function App() {
           <Stack.Screen name="OtherScreen" component={OtherScreen} />
           <Stack.Screen name="CategoriesScreen" component={CategoriesScreen} />
           <Stack.Screen name="ModelScreen" component={ModelScreen} />
+          <Stack.Screen name="CreateCategory" component={CreateCategory} />
+          <Stack.Screen name="CreateModel" component={CreateModel} />
 
-          <Stack.Screen name="LoginQRCode" component={LoginQRCodeScreen} />
           <Stack.Screen name="CreateAsset" component={CreateAsset} />
         </Stack.Navigator>
       </NavigationContainer>

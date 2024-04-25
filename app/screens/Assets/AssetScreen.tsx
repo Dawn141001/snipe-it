@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import {Button, IconButton, Searchbar} from 'react-native-paper';
+import {IconButton, Searchbar} from 'react-native-paper';
 import {AssetsAPI} from '../../apis/Assets.api';
 import {CategoriesAPI} from '../../apis/Category.api';
 import {StatusAPI} from '../../apis/Status.api';
@@ -135,36 +135,7 @@ export default function AssetScreen() {
             </View>
           )}
         </View>
-        {/* <View
-          style={{
-            flexDirection: 'column',
-            alignItems: 'flex-end',
-            marginTop: 20,
-          }}>
-          {listStatus && (
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                width: '100%',
-                alignItems: 'center',
-              }}>
-              <Text>Status</Text>
-              <View style={{width: 200, height: 30}}>
-                <DropDownPicker
-                  open={openStatus}
-                  style={{height: 30}}
-                  value={valueStatus}
-                  listMode="SCROLLVIEW"
-                  items={[{label: 'Tất cả', value: ''}, ...listStatus]}
-                  setOpen={setOpenStatus}
-                  setValue={setValueStatus}
-                  setItems={setListCategory}
-                />
-              </View>
-            </View>
-          )}
-        </View> */}
+
         <View style={{marginTop: 50, gap: 10, minHeight: 200}}>
           {listAssets &&
             (listAssets.length > 0 ? (

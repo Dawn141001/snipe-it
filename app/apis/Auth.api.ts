@@ -6,7 +6,7 @@ export class AuthAPI {
   static getMe = (id: number) => {
     return request({
       method: Method.GET,
-      url: `/${this.COMPONENT_NAME}/${id}`,
+      url: `/${this.COMPONENT_NAME}/1`,
     });
   };
 }

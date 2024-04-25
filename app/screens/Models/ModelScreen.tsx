@@ -11,6 +11,7 @@ import {
 import {CategoriesAPI} from '../../apis/Category.api';
 import {IModel} from '../../interface/Model.interface';
 import {ModelsAPI} from '../../apis/Models.api';
+import {IconButton} from 'react-native-paper';
 
 export default function ModelScreen() {
   const navigation = useNavigation();
@@ -30,6 +31,15 @@ export default function ModelScreen() {
         scrollEnabled
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}>
+        <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+          <IconButton
+            icon="plus"
+            style={{borderRadius: 50, borderWidth: 1, backgroundColor: 'blue'}}
+            iconColor={'white'}
+            size={20}
+            onPress={() => navigation.navigate('CreateModel')}
+          />
+        </View>
         <View
           style={{
             flexDirection: 'column',

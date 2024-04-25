@@ -4,4 +4,5 @@ export interface IModel {
   id?: number;
   name?: string;
   category?: ICategory;
+  category_id?: number;
 }

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {CategoriesAPI} from '../../apis/Category.api';
 import {ICategory} from '../../interface/Category.interface';
+import {IconButton} from 'react-native-paper';
 
 export default function CategoriesScreen() {
   const navigation = useNavigation();
@@ -24,6 +25,15 @@ export default function CategoriesScreen() {
   };
   return (
     <View style={styles.container}>
+      <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+        <IconButton
+          icon="plus"
+          style={{borderRadius: 50, borderWidth: 1, backgroundColor: 'blue'}}
+          iconColor={'white'}
+          size={20}
+          onPress={() => navigation.navigate('CreateCategory')}
+        />
+      </View>
       <ScrollView
         nestedScrollEnabled={true}
         scrollEnabled
