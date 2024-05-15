@@ -1,6 +1,7 @@
 export interface IAuth {
   id?: number;
   avatar?: string;
+  employee_num?: string;
   name?: string;
   username?: string;
   phone?: string;

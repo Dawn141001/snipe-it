@@ -17,7 +17,7 @@ export default function ProfileScreen() {
   const dispatch = useAppDispatch();
   const authProfile = useAppSelector(GetAuth);
   useEffect(() => {
-    AuthAPI.getMe(1).then(el => {
+    AuthAPI.getMe().then(el => {
       dispatch(SetAuth(el.data));
     });
   }, [dispatch]);
@@ -27,7 +27,7 @@ export default function ProfileScreen() {
       <View
         style={{
           width: '100%',
-          height: 170,
+          height: '100%',
           backgroundColor: '#0b1b32',
           paddingTop: 20,
           paddingHorizontal: 20,
@@ -57,31 +57,38 @@ export default function ProfileScreen() {
 
           <View>
             <Text style={{fontSize: 16, color: 'white'}}>
-              {authProfile.name}
+              {authProfile?.name ? authProfile.name : 'Unknown'}
             </Text>
             <Text style={{fontSize: 20, color: 'white'}}>
-              {authProfile.username}
+              {authProfile?.username ? authProfile?.username : 'Unknown'}
             </Text>
           </View>
+        </View>
+        <View
+          style={{
+            display: 'flex',
+            marginTop: 20,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text style={{fontSize: 20, color: 'white', marginBottom: 10}}>
+            Information
+          </Text>
+          <Text style={{fontSize: 16, color: 'white'}}>
+            Email:{authProfile?.email ? authProfile?.email : 'Unknown'}
+          </Text>
+          <Text style={{fontSize: 16, color: 'white'}}>
+            Country:{authProfile?.country ? authProfile?.country : 'Unknown'}
+          </Text>
+          <Text style={{fontSize: 16, color: 'white'}}>
+            Phone:{authProfile?.phone ? authProfile?.phone : 'Unknown'}
+          </Text>
+          <Text style={{fontSize: 16, color: 'white'}}>
+            Employee Num:
+            {authProfile?.employee_num ? authProfile?.employee_num : 'Unknown'}
+          </Text>
         </View>
       </View>
     </View>
   );
 }
-const styles = StyleSheet.create({
-  textmenu: {
-    fontSize: 15,
-    color: 'black',
-    fontWeight: '500',
-  },
-  menuprofile: {
-    backgroundColor: 'white',
-    padding: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#8d8d8d',
-    elevation: 5,
-  },
-});

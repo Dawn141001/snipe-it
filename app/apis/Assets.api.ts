@@ -19,6 +19,12 @@ export class AssetsAPI {
       url: `/${this.COMPONENT_NAME}/${id}`,
     });
   };
+  static getAssetByTag = (id: string) => {
+    return request({
+      method: Method.GET,
+      url: `/${this.COMPONENT_NAME}/bytag/${id}`,
+    });
+  };
   static create = (data: IAsset) => {
     return request({
       method: Method.POST,

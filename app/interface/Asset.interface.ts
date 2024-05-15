@@ -24,17 +24,20 @@ interface IAssignedTo {
 }
 
 export interface IAsset {
-  id?: string;
+  id?: number;
   name?: string;
+  status_id?: number;
+  model_id?: number;
+  purchase_cost?: number;
+  purchase_date?: {date?: string} | string | null;
+  supplier?: {id?: string; name?: string} | null;
+  notes: string;
+  supplier_id: number;
   asset_tag?: string;
   assigned_to?: IAssignedTo;
-  manufacturer?: string;
   image?: string;
-  status_id: number;
-  model_id: number;
   model?: IModel | null;
   category?: ICategory | null;
   status_label?: IModel | null;
   location?: string;
-  purchase_cost?: number;
 }

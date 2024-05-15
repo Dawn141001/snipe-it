@@ -19,6 +19,9 @@ import {QRCode} from './screens/QRCodeScreen.tsx';
 import EditProfileScreen from './screens/User/EditProfileScreen.tsx';
 import ProfileScreen from './screens/User/ProfileScreen.tsx';
 import {store} from './slices/store.ts';
+import CreateSupply from './screens/Supply/components/CreateSupply.tsx';
+import SuppliersScreen from './screens/Supply/SupplyScreen.tsx';
+import StatusScreen from './screens/Status/StatusScreen.tsx';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -47,6 +50,9 @@ function App() {
           <Stack.Screen name="ModelScreen" component={ModelScreen} />
           <Stack.Screen name="CreateCategory" component={CreateCategory} />
           <Stack.Screen name="CreateModel" component={CreateModel} />
+          <Stack.Screen name="CreateSupply" component={CreateSupply} />
+          <Stack.Screen name="SupplyScreen" component={SuppliersScreen} />
+          <Stack.Screen name="StatusScreen" component={StatusScreen} />
 
           <Stack.Screen name="CreateAsset" component={CreateAsset} />
         </Stack.Navigator>

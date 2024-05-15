@@ -30,6 +30,8 @@ export default function OtherScreen() {
             marginTop: 100,
             flexDirection: 'row',
             justifyContent: 'space-around',
+            flexWrap: 'wrap',
+            gap: 10,
           }}>
           <TouchableWithoutFeedback
             key={`categories`}
@@ -76,6 +78,54 @@ export default function OtherScreen() {
                   textAlign: 'center',
                 }}>
                 Models
+              </Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            key={`supply`}
+            style={{borderWidth: 1, borderRadius: 10, borderColor: 'black'}}
+            onPress={() => navigation.navigate('SupplyScreen')}>
+            <View
+              style={{
+                height: 100,
+                width: 100,
+                backgroundColor: '#853693',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 10,
+              }}>
+              <Text
+                style={{
+                  textTransform: 'uppercase',
+                  color: 'white',
+                  textAlign: 'center',
+                }}>
+                Supply
+              </Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            key={`status`}
+            style={{borderWidth: 1, borderRadius: 10, borderColor: 'black'}}
+            onPress={() => navigation.navigate('StatusScreen')}>
+            <View
+              style={{
+                height: 100,
+                width: 100,
+                backgroundColor: '#853693',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 10,
+              }}>
+              <Text
+                style={{
+                  textTransform: 'uppercase',
+                  color: 'white',
+                  textAlign: 'center',
+                }}>
+                Status
               </Text>
             </View>
           </TouchableWithoutFeedback>

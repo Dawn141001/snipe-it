@@ -13,6 +13,7 @@ import {
 } from '../../slices/reducers/Assets/Assets.reducer';
 import ItemAssetView from './../Assets/components/ItemAssetView';
 import LoadingModal from './../Components/LoadingModal';
+import {MainternancesAPI} from '../../apis/Maintenances.api';
 
 interface ISelectItem {
   label: string;
@@ -21,11 +22,8 @@ interface ISelectItem {
 
 export default function AssetScreen() {
   const navigation = useNavigation();
-  const [filterCategory, setfilterCategory] = useState('');
   const [openCategory, setOpenCategory] = useState<boolean>(false);
-  const [openStatus, setOpenStatus] = useState<boolean>(false);
   const [valueCate, setValueCate] = useState(null);
-  const [valueStatus, setValueStatus] = useState(null);
   const [listCategory, setListCategory] = useState<ISelectItem[]>([]);
   const [listStatus, setListStatus] = useState<ISelectItem[]>([]);
   const listAssets = useAppSelector(GetAssets);
@@ -60,6 +58,7 @@ export default function AssetScreen() {
       )
       .catch(er => console.log(er));
   };
+
   const searchAssets = () => {
     setIsLoading(true);
     AssetsAPI.fetchAll(valueCate !== null ? valueCate : undefined, search)
