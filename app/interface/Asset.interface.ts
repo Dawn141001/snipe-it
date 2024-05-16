@@ -31,8 +31,8 @@ export interface IAsset {
   purchase_cost?: number;
   purchase_date?: {date?: string} | string | null;
   supplier?: {id?: string; name?: string} | null;
-  notes: string;
-  supplier_id: number;
+  notes?: string;
+  supplier_id?: number;
   asset_tag?: string;
   assigned_to?: IAssignedTo;
   image?: string;
