@@ -1,4 +1,4 @@
-const ipconfig = 'http://192.168.1.13:80';
+const ipconfig = 'http://192.168.0.101:80';
 
 export const AppConfig = {
   apiUrl: `${ipconfig}/api/v1/`,

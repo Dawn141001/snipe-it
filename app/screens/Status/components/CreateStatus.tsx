@@ -1,18 +1,11 @@
 import {useNavigation} from '@react-navigation/native';
+import {useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Snackbar, Text, TextInput} from 'react-native-paper';
-import {AssetsAPI} from '../../../apis/Assets.api';
-import {useAppDispatch} from '../../../slices/hooks';
-import {AddAssets} from '../../../slices/reducers/Assets/Assets.reducer';
-import {CategoriesAPI} from '../../../apis/Category.api';
-import {useEffect, useState} from 'react';
-import DropDownPicker from 'react-native-dropdown-picker';
 import {StatusAPI} from '../../../apis/Status.api';
-import {IAsset} from '../../../interface/Asset.interface';
-import {ModelsAPI} from '../../../apis/Models.api';
-import {ICategory} from '../../../interface/Category.interface';
-import LoadingModal from '../../Components/LoadingModal';
 import {IStatus} from '../../../interface/Status.interface';
+import {useAppDispatch} from '../../../slices/hooks';
+import LoadingModal from '../../Components/LoadingModal';
 
 const CreateStatus = () => {
   const navigation = useNavigation();
@@ -40,7 +33,7 @@ const CreateStatus = () => {
         setIsLoading(false);
         setTimeout(() => {
           navigation.navigate('OtherScreen');
-        }, 1000); // 3 giây
+        }, 1000); // 1 giây
       });
   };
 
