@@ -10,6 +10,11 @@ import moment from 'moment';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {SuppliesAPI} from '../../apis/Supply.api';
 
+interface ISelectItem {
+  label: string;
+  value: string;
+}
+
 const CreateMaintenance = ({route, navigate}: any) => {
   const {id} = route.params;
   const navigation = useNavigation();
@@ -21,41 +26,43 @@ const CreateMaintenance = ({route, navigate}: any) => {
   const [openDate, setOpenDate] = useState(false);
   const [openSupply, setOpenSupply] = useState<boolean>(false);
   const [valueSupply, setValueSupply] = useState(null);
-  const [listSupply, setListSupply] = useState<{label: any; value: string}[]>(
-    [],
-  );
+  const [listSupply, setListSupply] = useState<ISelectItem[]>([]);
   useEffect(() => {
     searchSupply();
   }, []);
   const searchSupply = () => {
     SuppliesAPI.fetchAll()
-      .then(res => setListSupply(res.data.rows))
+      .then(res =>
+        setListSupply(
+          res.data.rows.map((el: any) => ({label: el.name, value: el.id})),
+        ),
+      )
       .catch(er => console.log(er));
   };
   const createItem = async () => {
     setIsLoading(true);
-    console.log(maintenaces);
-    // await MainternancesAPI.createMaintenance({
-    //   ...maintenaces,
-    //   asset_maintenance_type: 'Maintenance',
-    // })
-    //   .then((res: any) => {
-    //     if (res.data.status == 'success') {
-    //       setTextSnack('Tạo thành công');
-    //     } else {
-    //       setTextSnack('Tạo thất bại');
-    //     }
-    //   })
-    //   .catch(er => {
-    //     setTextSnack('Tạo thất bại');
-    //   })
-    //   .finally(() => {
-    //     setVisible(true);
-    //     setIsLoading(false);
-    //     setTimeout(() => {
-    //       navigation.goBack();
-    //     }, 1000);
-    //   });
+    await MainternancesAPI.createMaintenance({
+      ...maintenaces,
+      supplier_id: Number(valueSupply),
+      asset_maintenance_type: 'Maintenance',
+    })
+      .then((res: any) => {
+        if (res.data.status == 'success') {
+          setTextSnack('Tạo thành công');
+        } else {
+          setTextSnack('Tạo thất bại');
+        }
+      })
+      .catch(er => {
+        setTextSnack('Tạo thất bại');
+      })
+      .finally(() => {
+        setVisible(true);
+        setIsLoading(false);
+        setTimeout(() => {
+          navigation.navigate('AssetScreen');
+        }, 1000);
+      });
   };
 
   return (
@@ -115,14 +122,16 @@ const CreateMaintenance = ({route, navigate}: any) => {
               }}
             />
           </View>
-          {/* <View style={styles.rowInput}>
+          <View style={styles.rowInput} key={'supply'}>
             <View
+              key={'supply2'}
               style={{
                 flexDirection: 'column',
                 alignItems: 'flex-end',
               }}>
               {listSupply && (
                 <View
+                  key={'suppy3'}
                   style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
@@ -147,7 +156,7 @@ const CreateMaintenance = ({route, navigate}: any) => {
                 </View>
               )}
             </View>
-          </View> */}
+          </View>
           <View style={styles.rowInput}>
             <Text style={{width: 100}}>Cost</Text>
             <TextInput
@@ -155,6 +164,18 @@ const CreateMaintenance = ({route, navigate}: any) => {
               onChangeText={el =>
                 setMaintenaces({...maintenaces, cost: Number(el)})
               }
+              style={{
+                paddingHorizontal: 10,
+                backgroundColor: 'white',
+                height: 40,
+                flex: 1,
+              }}
+            />
+          </View>
+          <View style={styles.rowInput}>
+            <Text style={{width: 100}}>Note</Text>
+            <TextInput
+              onChangeText={el => setMaintenaces({...maintenaces, notes: el})}
               style={{
                 paddingHorizontal: 10,
                 backgroundColor: 'white',
