@@ -184,6 +184,21 @@ export default function DetailAssetScreen({route, navigate}: any) {
 
       <View
         style={{flexDirection: 'column', position: 'relative', padding: 20}}>
+        <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+          <Button
+            labelStyle={{color: 'white'}}
+            onPress={() => {
+              navigation.navigate('CreateMaintenance', {id: id});
+            }}
+            style={{
+              width: 150,
+              backgroundColor: 'blue',
+              marginBottom: 20,
+              borderRadius: 10,
+            }}>
+            + Maintenance
+          </Button>
+        </View>
         <View
           style={{
             borderWidth: 1,

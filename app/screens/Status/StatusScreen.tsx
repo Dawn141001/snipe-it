@@ -33,7 +33,7 @@ export default function StatusScreen() {
           style={{borderRadius: 50, borderWidth: 1, backgroundColor: 'blue'}}
           iconColor={'white'}
           size={20}
-          // onPress={() => navigation.navigate('CreateCategory')}
+          onPress={() => navigation.navigate('CreateStatus')}
         />
       </View>
       <ScrollView

@@ -39,7 +39,7 @@ const CreateCategory = () => {
         setIsLoading(false);
         setTimeout(() => {
           navigation.navigate('OtherScreen');
-        }, 1000); // 3 giây
+        }, 1000); // 1 giây
       });
   };
 

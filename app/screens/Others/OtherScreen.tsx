@@ -29,9 +29,9 @@ export default function OtherScreen() {
           style={{
             marginTop: 100,
             flexDirection: 'row',
-            justifyContent: 'space-around',
+            justifyContent: 'center',
             flexWrap: 'wrap',
-            gap: 10,
+            gap: 20,
           }}>
           <TouchableWithoutFeedback
             key={`categories`}
